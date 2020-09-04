@@ -21,7 +21,7 @@ class PPOTrainer(Trainer):
 
     def __init__(self, sess, env, brain_name, trainer_parameters, training, seed):
         """
-        Responsible for collecting experiences and training PPO model.
+        Responsible for collecting exp_samples and training PPO model.
         :param sess: Tensorflow session.
         :param env: The UnityEnvironment.
         :param  trainer_parameters: The parameters for the trainer (dictionary).
@@ -165,7 +165,7 @@ class PPOTrainer(Trainer):
         Decides actions given observations information, and takes them in environment.
         :param all_brain_info: A dictionary of brain names and BrainInfo from environment.
         :return: a tuple containing action, memories, values and an object
-        to be passed to add experiences
+        to be passed to add exp_samples
         """
         curr_brain_info = all_brain_info[self.brain_name]
         if len(curr_brain_info.agents) == 0:
@@ -198,7 +198,7 @@ class PPOTrainer(Trainer):
 
     def construct_curr_info(self, next_info: BrainInfo) -> BrainInfo:
         """
-        Constructs a BrainInfo which contains the most recent previous experiences for all agents info
+        Constructs a BrainInfo which contains the most recent previous exp_samples for all agents info
         which correspond to the agents in a provided next_info.
         :BrainInfo next_info: A t+1 BrainInfo.
         :return: curr_info: Reconstructed BrainInfo to match agents of next_info.
@@ -293,7 +293,7 @@ class PPOTrainer(Trainer):
 
     def add_experiences(self, curr_all_info: AllBrainInfo, next_all_info: AllBrainInfo, take_action_outputs):
         """
-        Adds experiences to each agent's experience history.
+        Adds exp_samples to each agent's experience history.
         :param curr_all_info: Dictionary of all current brains and corresponding BrainInfo.
         :param next_all_info: Dictionary of all current brains and corresponding BrainInfo.
         :param take_action_outputs: The outputs of the take action method.

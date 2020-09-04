@@ -21,7 +21,7 @@ class Trainer(object):
 
     def __init__(self, sess, env, brain_name, trainer_parameters, training):
         """
-        Responsible for collecting experiences and training a neural network model.
+        Responsible for collecting exp_samples and training a neural network model.
         :param sess: Tensorflow session.
         :param env: The UnityEnvironment.
         :param  trainer_parameters: The parameters for the trainer (dictionary).
@@ -87,13 +87,13 @@ class Trainer(object):
         Decides actions given state/observation information, and takes them in environment.
         :param all_brain_info: A dictionary of brain names and BrainInfo from environment.
         :return: a tuple containing action, memories, values and an object
-        to be passed to add experiences
+        to be passed to add exp_samples
         """
         raise UnityTrainerException("The take_action method was not implemented.")
 
     def add_experiences(self, curr_info: AllBrainInfo, next_info: AllBrainInfo, take_action_outputs):
         """
-        Adds experiences to each agent's experience history.
+        Adds exp_samples to each agent's experience history.
         :param curr_info: Current AllBrainInfo.
         :param next_info: Next AllBrainInfo.
         :param take_action_outputs: The outputs of the take action method.
@@ -142,7 +142,7 @@ class Trainer(object):
                             .format(self.brain_name, self.get_step,
                                     mean_reward, np.std(self.stats['cumulative_reward'])))
             else:
-                logger.info(" {}: Step: {}. No episode was completed since last summary."
+                logger.info(" {}: Step: {}. No episode_idx was completed since last summary."
                             .format(self.brain_name, self.get_step))
             summary = tf.Summary()
             for key in self.stats:

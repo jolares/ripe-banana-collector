@@ -21,7 +21,7 @@ class BehavioralCloningTrainer(Trainer):
 
     def __init__(self, sess, env, brain_name, trainer_parameters, training, seed):
         """
-        Responsible for collecting experiences and training PPO model.
+        Responsible for collecting exp_samples and training PPO model.
         :param sess: Tensorflow session.
         :param env: The UnityEnvironment.
         :param  trainer_parameters: The parameters for the trainer (dictionary).
@@ -136,7 +136,7 @@ class BehavioralCloningTrainer(Trainer):
         Decides actions given state/observation information, and takes them in environment.
         :param all_brain_info: AllBrainInfo from environment.
         :return: a tuple containing action, memories, values and an object
-        to be passed to add experiences
+        to be passed to add exp_samples
         """
         if len(all_brain_info[self.brain_name].agents) == 0:
             return [], [], [], None
@@ -161,7 +161,7 @@ class BehavioralCloningTrainer(Trainer):
 
     def add_experiences(self, curr_info: AllBrainInfo, next_info: AllBrainInfo, take_action_outputs):
         """
-        Adds experiences to each agent's experience history.
+        Adds exp_samples to each agent's experience history.
         :param curr_info: Current AllBrainInfo (Dictionary of all current brains and corresponding BrainInfo).
         :param next_info: Next AllBrainInfo (Dictionary of all current brains and corresponding BrainInfo).
         :param take_action_outputs: The outputs of the take action method.

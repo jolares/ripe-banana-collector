@@ -180,7 +180,7 @@ class UnityEnvironment(object):
         if launch_string is None:
             self._close()
             raise UnityEnvironmentException("Couldn't launch the {0} environment. "
-                                            "Provided filename does not match any environments."
+                                            "Provided saveto_filename does not match any environments."
                                             .format(true_filename))
         else:
             logger.debug("This is the launch string {}".format(launch_string))
@@ -379,7 +379,7 @@ class UnityEnvironment(object):
         elif not self._loaded:
             raise UnityEnvironmentException("No Unity environment is loaded.")
         elif self._global_done:
-            raise UnityActionException("The episode is completed. Reset the environment with 'reset()'")
+            raise UnityActionException("The episode_idx is completed. Reset the environment with 'reset()'")
         elif self.global_done is None:
             raise UnityActionException(
                 "You cannot conduct step without first calling reset. Reset the environment with 'reset()'")
